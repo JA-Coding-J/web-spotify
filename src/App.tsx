@@ -1,12 +1,14 @@
 import React from 'react';
-// import { useState } from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import { routes } from './router/config';
+import Router from './router/Router';
 
 function App() {
-  // const [count, setCount] = useState(0);
-
-  return <div className="App">Hello World!</div>;
+  return (
+    <div className="App varient">
+      <Router routes={routes} />
+    </div>
+  );
 }
 
 export default App;
