@@ -4,7 +4,7 @@
     "strictNullChecks": false,
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "jest"],
+    "types": ["vite/client", "jest", "node"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,    
@@ -23,6 +23,6 @@
     }
   },
   "include": [
-    "src/*"
+    "src"
   ]
 }

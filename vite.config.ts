@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path';
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 
@@ -10,15 +10,6 @@ export default defineConfig({
     },
   },
   plugins: [reactRefresh()],
-  server: {
-    cors: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-      },
-    },
-  },
   build: {
     outDir: 'build',
   },

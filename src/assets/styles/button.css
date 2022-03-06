@@ -1,0 +1,19 @@
+.cs-button {
+  --color-indigo-600: #4f46e5;
+  --color-indigo-800: #3730a3;
+  border-radius: var(--rounded-md);
+  padding: calc(var(--mp-1)*2) calc(var(--mp-1)*4);
+  margin: calc(var(--mp-1)*2);
+  color: var(--color-white);
+  background-color: var(--color-indigo);
+}
+
+.cs-button:hover {
+  background-color: var(--color-indigo-800);
+  cursor: pointer;
+}
+
+.cs-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}

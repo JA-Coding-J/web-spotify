@@ -1,0 +1,20 @@
+.varient {
+  --mp-1: 0.25rem;
+  --mp-2: 0.5rem;
+  --mp-3: 0.75rem;
+  --mp-4: 1rem;
+  --mp-5: 1.25rem;
+  --mp-6: 1.5rem;
+  --rounded-md: 0.375rem;
+  --rounded-lg: 0.5rem;
+  --color-white: #FFFFFF;
+  --color-indigo: #4f46e5;
+  --max-w-md: 28rem;
+  --max-w-lg: 30rem;
+  --color-gray-300: #d1d5db;
+  --color-gray-50: #f9fafb;
+  --color-gray-500: #64748b;
+  --text-sm: 0.875rem;
+  --font-medium: 500;
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
