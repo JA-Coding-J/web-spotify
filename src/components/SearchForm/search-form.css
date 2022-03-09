@@ -1,0 +1,15 @@
+.search-form {
+  margin: auto;
+  padding: 10px 0;
+  background: linear-gradient(to bottom, rgb(83, 83, 83), var(--bg-color));
+}
+
+.search-form .search-bar-box {
+  margin: auto;
+  display: flex;
+  max-width: var(--width-lg);
+}
+
+.search-bar-box .search-bar {
+  flex: 1;
+}

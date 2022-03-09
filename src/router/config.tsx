@@ -45,6 +45,11 @@ export const routes: IRoute[] = [
     component: lazy(() => import('@/pages/Tracks')),
     exact: true,
   },
+  {
+    path: '/album/:id',
+    component: lazy(() => import('@/pages/PlayList')),
+    exact: true,
+  },
   // {
   //   path: '/login',
   //   component: lazy(() => import('../pages/Login')),

@@ -1,0 +1,17 @@
+.cs-button {
+  border-radius: var(--rounded-md);
+  padding: var(--mp-2) var(--mp-4);
+  margin: var(--mp-2);
+  color: var(--controller-text-color);
+  background-color: var(--controller-bg-color);
+}
+
+.cs-button:hover {
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.cs-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}

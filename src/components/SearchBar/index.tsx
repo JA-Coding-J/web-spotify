@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler } from 'react';
-import '@/assets/styles/search-bar.css';
+import './search-bar.css';
 
 interface SearchProp {
   onChange: ChangeEventHandler<HTMLInputElement>;

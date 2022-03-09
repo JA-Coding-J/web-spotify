@@ -1,6 +1,6 @@
 .container {
   text-align: center;
-  background-color: #FFFFFF;
+  /* background-color: var(--bg-color); */
   margin: auto;
   padding: 8px;
 }

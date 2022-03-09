@@ -1,15 +1,13 @@
 .cs-table {
-  --cs-table-my: calc(var(--mp-1)*8);
   display: flex;
   flex-direction: column;
-  margin-top: var(--cs-table-my);
-  margin-bottom: var(--cs-table-my);
+  margin-bottom: var(--mp-8);
+  width: 100%;
 }
 
 .cs-table-container {
-  margin-top: var(--mp-2);
   margin-bottom: var(--mp-2);
-  padding: var(--mp-2) var(--mp-8);
+  padding-bottom: var(--mp-2);
   vertical-align: middle;
   display: inline-block;
   min-width: 100%;
@@ -20,7 +18,7 @@
   border-bottom: 1px;
   border-color: var(--color-gray-200);
   border-radius: var(--rounded-lg);
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  /* box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); */
 }
 
 .cs-table-box table {
@@ -29,12 +27,18 @@
   border-top-width: 0px;
   border-bottom-width: 2px;
   border-color: var(--color-gray-200);
+  border-collapse: collapse;
+}
+
+.cs-table-box table a {
+  text-decoration: none;
+}
+
+.cs-table-box table a:hover {
+  text-decoration: underline;
 }
 
 /* table header */
-.cs-table-header {
-  background-color: var(--gray-50);
-}
 
 .cs-table-header th {
   padding: var(--mp-3) var(--mp-6);
@@ -42,14 +46,12 @@
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: var(--font-medium);
-  color: var(--color-gray-500);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 /* table body */
 .cs-table-body {
-  background-color: #fff;
   border-top-width: 0px;
   border-bottom-width: 1px;
   border-color: var(--color-gray-200);

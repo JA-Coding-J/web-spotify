@@ -1,0 +1,120 @@
+.playlist {
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  color: #FFF;
+  background-color: var(--bg-color);
+  z-index: 0;
+}
+
+.playlist a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.playlist a:hover {
+  text-decoration: underline;
+}
+
+/* backgound */
+.playlist_page-bg-head {
+  background: linear-gradient(transparent, rgba(0, 0, 0, .5));
+  background-color: rgb(200, 200, 184);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20rem;
+  z-index: -1;
+  transition: background 1s ease;
+}
+
+.playlist_page-bg-tracklist {
+  background-image: linear-gradient(rgba(0, 0, 0, .55), var(--bg-color));
+  background-color: rgb(200, 200, 184);
+  position: absolute;
+  top: 20rem;
+  left: 0;
+  right: 0;
+  height: 16rem;
+  z-index: -1;
+}
+
+/* header */
+.playlist_head {
+  box-sizing: border-box;
+  width: 100%;
+  height: 20rem;
+  padding: 0 var(--mp-10) var(--mp-5);
+  text-align: left;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* image */
+.playlist_head .playlist_head-img {
+  flex: 1;
+  max-width: 24rem;
+  box-sizing: border-box;
+  padding: 0 var(--mp-5);
+}
+
+/* playlist description */
+.playlist_head .playlist_head-right {
+  max-width: calc(100vw - 24rem);
+}
+
+.playlist_head-right>* {
+  margin-bottom: var(--mp-2);
+}
+
+.playlist_head-right_type {
+  font-size: var(--text-sm);
+}
+
+.playlist_head-right>h1 {
+  font-size: 6rem;
+  line-height: 7rem;
+  max-width: 100%;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.playlist_head-right_desc {
+  color: var(--color-300);
+  font-size: 0.9rem;
+  line-height: 1rem;
+}
+
+.playlist_head-right_owner {
+  font-size: 0.9rem;
+  line-height: 1rem;
+}
+
+.playlist_head-right_owner>span::before {
+  content: "•";
+  margin: 0 4px;
+}
+
+/* playlist duration */
+.playlist_head-right_owner .playlist-duration {
+  color: rgba(255, 255, 255, .7);
+}
+
+
+/* track list */
+.playlist_track-list-container {
+  padding: 0 var(--mp-10);
+  min-height: 12rem;
+}
+
+.playlist_track-list-container .cs-table-body tr>td {
+  transition: background-color .2s ease;
+}
+
+.playlist_track-list-container .cs-table-body tr:hover>td {
+  background-color: rgba(0, 0, 0, .2);
+  cursor: pointer;
+}

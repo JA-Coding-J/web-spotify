@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "settings": {
     "import/resolver": {
@@ -32,5 +33,5 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off"
   },
-  "ignorePatterns": ["node_modules", "build", "dist", "*.css"]
+  "ignorePatterns": [".eslintrc.json", "node_modules", "build", "dist", "*.css"]
 }

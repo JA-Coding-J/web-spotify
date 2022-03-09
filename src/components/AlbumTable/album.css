@@ -1,0 +1,67 @@
+.album-table {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.album-card {
+  width: 12rem;
+  background-color: #1c1c1c;
+  border-radius: var(--rounded-md);
+  padding: var(--mp-4);
+  position: relative;
+  box-shadow: none;
+  transition: box-shadow 0.1s ease-in;
+  margin: var(--mp-2) var(--mp-4);
+}
+
+.album-card a {
+  text-decoration: none;
+}
+
+.album-card:hover {
+  cursor: pointer;
+  box-shadow: 0 1px 5px var(--color-gray-500);
+  background-color: transparent;
+}
+
+.album-card .album-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.album-box>.album-img {
+  margin-bottom: var(--mp-5);
+}
+
+.album-img>img {
+  border-radius: var(--rounded-md);
+}
+
+.album-box>.album-desc {
+  width: 100%;
+  text-align: left;
+}
+
+.album-box>.album-desc>a {
+  color: #FFF;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.album-desc>a .name {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.album-box>.album-desc>.artist a {
+  color: var(--color-gray-500);
+  text-decoration: none;
+}
+
+.album-box>.album-desc>.artist a:hover {
+  text-decoration: underline;
+}

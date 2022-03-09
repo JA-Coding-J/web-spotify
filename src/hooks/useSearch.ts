@@ -1,5 +1,7 @@
+import { AlbumType, SearchType } from '../types/spotify';
 import { useEffect } from 'react';
 import { useGet } from './http';
+import { SearchTypeEnum } from '@/consts';
 
 export type QType =
   | 'album'
@@ -12,17 +14,6 @@ export type QType =
   | 'isrc'
   | 'genre';
 
-export enum SearchTypeEnum {
-  'album' = 'album',
-  'artist' = 'artist',
-  'playlist' = 'playlist',
-  'track' = 'track',
-  'show' = 'show',
-  'episode' = 'episode',
-}
-
-export type SearchType = keyof typeof SearchTypeEnum;
-
 export type SearchPayloadType = {
   q: QType;
   type: Array<SearchType>;
@@ -32,14 +23,14 @@ export type SearchPayloadType = {
   offset?: number;
 };
 
-type SearchParam = {
-  q: QType;
-  type: string;
-  include_external?: 'audio';
-  limit?: number;
-  market?: string;
-  offset?: number;
-};
+// type SearchParam = {
+//   q: QType;
+//   type: string;
+//   include_external?: 'audio';
+//   limit?: number;
+//   market?: string;
+//   offset?: number;
+// };
 
 const defaultPayload = {
   q: 'album',
@@ -66,7 +57,18 @@ export const useSearch = (payload: SearchPayloadType = defaultPayload) => {
 };
 
 export const useSearchTracksById = (id: string) => {
-  const { request, authorization, ...rest } = useGet<any, any>(`tracks/${id}`);
+  const { request, authorization, ...rest } = useGet<any, any>(`/tracks/${id}`);
+  useEffect(() => {
+    if (!id) return;
+    request();
+  }, [authorization]);
+  return { ...rest };
+};
+
+export const useAlbumById = (id: string) => {
+  const { request, authorization, ...rest } = useGet<AlbumType>(
+    `/albums/${id}`,
+  );
   useEffect(() => {
     if (!id) return;
     request();

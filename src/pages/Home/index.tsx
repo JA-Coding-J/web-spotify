@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import { SearchType, useSearch } from '../../hooks/useSearch';
+import React, { useEffect, useState } from 'react';
+import { useSearch } from '../../hooks/useSearch';
+import SearchResult from '@/components/SearchResult';
 import SearchForm from '@/components/SearchForm';
+import { SearchType } from '../../types/spotify';
+import { SearchTypeEnum } from '@/consts';
+
+const headers = [{ name: '' }];
 
 export default function Home() {
   const [searchText, setSearchText] = useState<string>('');
-  const [type, setType] = useState<Array<SearchType>>([]);
+  const [types, setTypes] = useState<Array<SearchType>>(
+    Object.keys(SearchTypeEnum) as Array<SearchType>,
+  );
   // const [formData, setFormData] = useState<SearchPayloadType>();
   const { data, loading, error } = useSearch();
 
@@ -12,15 +19,35 @@ export default function Home() {
   //   Object.entries(data).map(([key, data]) => (
   //     <SearchResult headers={headers} dataList={data} />
   //   ));
-  console.log(data);
+  useEffect(() => {
+    console.log(data);
+    console.log(extractObjectType(data));
+  }, [data]);
 
   return (
     <div>
       <SearchForm
         searchText={searchText}
         searchChange={(e) => setSearchText(e.target.value)}
-        type={type}
+        type={types}
       />
+      <SearchResult data={data} />
     </div>
   );
+}
+
+function extractObjectType(target) {
+  const typeObj = { keys: [] };
+  if (target === null || target === undefined) return target;
+  if (typeof target === 'object' && !Array.isArray(target)) {
+    typeObj.keys = Object.keys(target);
+    Object.entries(target).forEach(([k, v]) => {
+      typeObj[k] = extractObjectType(v);
+    });
+    return typeObj;
+  } else if (Array.isArray(target)) {
+    return [extractObjectType(target[0])];
+  } else {
+    return typeof target;
+  }
 }

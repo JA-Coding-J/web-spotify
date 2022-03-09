@@ -1,6 +1,6 @@
 .search-bar {
   margin: auto;
-  max-width: var(--max-w-md);
+  max-width: var(--width-md);
   height: 2.5rem;
   display: flex;
   border-radius: var(--rounded-md);

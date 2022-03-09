@@ -1,4 +1,5 @@
 import React from 'react';
+import './table.css';
 
 interface TableProps {
   children: any;
@@ -7,11 +8,9 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ children }: TableProps) => {
   return (
     <div className="cs-table">
-      <div className="my-2 sm:-mx-6 lg:-mx-8">
-        <div className="cs-table-container">
-          <div className="cs-table-box">
-            <table>{children}</table>
-          </div>
+      <div className="cs-table-container">
+        <div className="cs-table-box">
+          <table>{children}</table>
         </div>
       </div>
     </div>

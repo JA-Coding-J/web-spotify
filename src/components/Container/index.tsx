@@ -1,5 +1,5 @@
 import React from 'react';
-import '@/assets/styles/container.css';
+import './container.css';
 
 interface ContainerProps {
   children: any;
