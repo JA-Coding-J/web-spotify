@@ -3,9 +3,7 @@ import { useSearch } from '../../hooks/useSearch';
 import SearchResult from '@/components/SearchResult';
 import SearchForm from '@/components/SearchForm';
 import { SearchType } from '../../types/spotify';
-import { SearchTypeEnum } from '@/consts';
-
-const headers = [{ name: '' }];
+import { SearchTypeEnum, tabNameMap } from '@/consts';
 
 export default function Home() {
   const [searchText, setSearchText] = useState<string>('');
@@ -15,23 +13,19 @@ export default function Home() {
   // const [formData, setFormData] = useState<SearchPayloadType>();
   const { data, loading, error } = useSearch();
 
-  // const generateTable = () =>
-  //   Object.entries(data).map(([key, data]) => (
-  //     <SearchResult headers={headers} dataList={data} />
-  //   ));
   useEffect(() => {
     console.log(data);
     console.log(extractObjectType(data));
   }, [data]);
 
   return (
-    <div>
+    <div className="home" style={{ backgroundColor: '#1b1b1b' }}>
       <SearchForm
         searchText={searchText}
         searchChange={(e) => setSearchText(e.target.value)}
         type={types}
       />
-      <SearchResult data={data} />
+      <SearchResult data={data} tabsName={types.map((t) => tabNameMap[t])} />
     </div>
   );
 }

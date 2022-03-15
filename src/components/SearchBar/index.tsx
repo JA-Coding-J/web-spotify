@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler } from 'react';
-import './search-bar.css';
+import '@/assets/styles/search-bar.css';
 
 interface SearchProp {
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -8,7 +8,7 @@ interface SearchProp {
 
 function SearchBar({ onChange, value }: SearchProp) {
   return (
-    <div className="search-bar">
+    <label htmlFor="searchBox" className="search-bar">
       <span className="search-label">Search</span>
       <input
         type="search"
@@ -18,7 +18,7 @@ function SearchBar({ onChange, value }: SearchProp) {
         value={value}
         placeholder="I want to search for..."
       ></input>
-    </div>
+    </label>
   );
 }
 

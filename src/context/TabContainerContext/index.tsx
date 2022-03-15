@@ -22,6 +22,8 @@ export const TabContext = createContext<TabContextState>(
 
 export const useTabContext = () => useContext(TabContext);
 
+export const TabContextConsumer = TabContext.Consumer;
+
 export const tabContextReducer = (
   state: TabContextState,
   action: ActionType,

@@ -10,7 +10,7 @@ import {
 } from '@/utils';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import './playlist.css';
+import '@/assets/styles/playlist.css';
 
 function playlist() {
   const { id } = useParams<{ id: string }>();

@@ -2,4 +2,5 @@
   width: 75vw;
   min-width: 50rem;
   margin: auto;
+  min-height: var(--width-lg);
 }

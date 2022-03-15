@@ -1,5 +1,5 @@
 import React from 'react';
-import './table.css';
+import '@/assets/styles/table.css';
 
 interface TableProps {
   children: any;

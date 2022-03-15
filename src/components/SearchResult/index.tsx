@@ -1,16 +1,17 @@
-import { useTabContext } from '@/context/TabContainerContext';
+import { TabContextConsumer } from '@/context/TabContainerContext';
 import React from 'react';
 import AlbumTable from '../AlbumTable';
 import TabContainerProvider from '@/context/TabContainerContext/provider';
 import Container from '../Container';
-import './search-result.css';
+import '@/assets/styles/search-result.css';
 import { ResultType } from '@/types/spotify';
 
 interface SearchResultProp {
   data: Record<string, ResultType>;
+  tabsName: Array<string>;
 }
 
-const TableListComp = {
+const TableListCompMap = {
   albums: AlbumTable,
   artists: '',
   episodes: '',
@@ -19,23 +20,15 @@ const TableListComp = {
   tracks: '',
 };
 
-const tabsName = [
-  'albums',
-  'artists',
-  'episodes',
-  'playlists',
-  'shows',
-  'tracks',
-];
-
-function SearchResult({ data }: SearchResultProp) {
-  const { tabIndex } = useTabContext();
-  function generateTable() {
+function SearchResult({ data, tabsName }: SearchResultProp) {
+  function generateTable(tabIndex: number) {
     // different type result list
     const tableName = tabsName[tabIndex];
-    const TableList = TableListComp[tableName];
-    return (
-      data && data[tableName] && <TableList dataList={data[tableName].items} />
+    const TableList = TableListCompMap[tableName];
+    return data && data[tableName] && TableList ? (
+      <TableList dataList={data[tableName].items} />
+    ) : (
+      <div>no result</div>
     );
   }
 
@@ -43,7 +36,9 @@ function SearchResult({ data }: SearchResultProp) {
     <Container>
       <div className="search-result">
         <TabContainerProvider tabsName={tabsName}>
-          {generateTable()}
+          <TabContextConsumer>
+            {({ tabIndex }) => generateTable(tabIndex)}
+          </TabContextConsumer>
         </TabContainerProvider>
       </div>
     </Container>

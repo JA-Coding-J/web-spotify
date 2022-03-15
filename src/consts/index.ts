@@ -9,3 +9,12 @@ export enum SearchTypeEnum {
   'show' = 'show',
   'episode' = 'episode',
 }
+
+export const tabNameMap = {
+  [SearchTypeEnum.album]: 'albums',
+  [SearchTypeEnum.artist]: 'artists',
+  [SearchTypeEnum.episode]: 'episodes',
+  [SearchTypeEnum.playlist]: 'playlists',
+  [SearchTypeEnum.show]: 'shows',
+  [SearchTypeEnum.track]: 'tracks',
+};

@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import './button.css';
+import '@/assets/styles/button.css';
 
 interface ButtonProp {
   onClick?: MouseEventHandler;

@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler } from 'react';
 import SearchBar from '../SearchBar';
-import './search-form.css';
+import '@/assets/styles/search-form.css';
 import Button from '../Button';
 
 interface SearchFormProp {

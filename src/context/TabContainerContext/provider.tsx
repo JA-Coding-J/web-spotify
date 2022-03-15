@@ -29,7 +29,6 @@ function TabContainerProvider({ children, tabsName }: TabContainerProp) {
     <TabContextProvider value={{ tabIndex: state.tabIndex }}>
       <Container>
         <div className="tab-container">
-          {/* tab list */}
           <ul>
             {tabsName &&
               tabsName.map((tab, index) => (
@@ -43,7 +42,6 @@ function TabContainerProvider({ children, tabsName }: TabContainerProp) {
               ))}
           </ul>
           <div className="divider" />
-          {/* containers */}
           {children}
         </div>
       </Container>
