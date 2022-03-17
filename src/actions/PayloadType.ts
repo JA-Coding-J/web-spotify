@@ -1,3 +1,4 @@
-export interface UserLoginProp {
+export interface TokenProp {
   authorization: string;
+  expiresTimeStamp: number;
 }

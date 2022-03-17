@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from './ActionType';
-import { UserLoginProp } from './PayloadType';
+import { TokenProp } from './PayloadType';
 
-export const userLogin = createAction<UserLoginProp>(ActionType.LOGIN);
+export const userLogin = createAction<TokenProp>(ActionType.LOGIN);

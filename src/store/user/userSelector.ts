@@ -1,4 +1,7 @@
 import { RootState } from '..';
 
-export const selectUserAuthorization = (state: RootState) =>
+export const selectAuthorization = (state: RootState) =>
   state.user.authorization;
+
+export const selectExpiresTimeStamp = (state: RootState) =>
+  state.user.expiresTimeStamp;

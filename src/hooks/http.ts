@@ -1,9 +1,8 @@
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import axios, { AxiosRequestConfig, Method } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { selectUserAuthorization } from '@/store/user/userSelector';
+import { selectAuthorization } from '@/store/user/userSelector';
 import { useGetToken } from './useGetToken';
-import { ActionType } from '@/actions/ActionType';
 
 export const client = axios.create({
   baseURL: 'https://api.spotify.com/v1',
@@ -16,11 +15,16 @@ export const useApi =
     const [error, setError] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
     const authRef = useRef<string>();
-    const { authorization } = useGetToken();
+    const { loading: tokenLoading } = useGetToken();
+    const authorization = useAppSelector(selectAuthorization);
 
     useEffect(() => {
       authRef.current = authorization;
     });
+
+    useEffect(() => {
+      setLoading(tokenLoading);
+    }, [tokenLoading]);
 
     const request = useCallback(
       async (payload?: D) => {

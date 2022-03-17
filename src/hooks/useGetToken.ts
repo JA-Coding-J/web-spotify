@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { client_id, client_secret } from '../consts';
 import { Buffer } from 'buffer';
 import { ActionType } from '@/actions/ActionType';
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { selectExpiresTimeStamp } from '@/store/user/userSelector';
 
 type TokenApiResponse = {
   access_token: string;
@@ -12,19 +13,13 @@ type TokenApiResponse = {
 };
 
 export const useGetToken = () => {
-  const [authorization, setAuthorization] = useState<string>();
-  const [expiresTimeStamp, setExpiresTimeStamp] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch({
-      type: ActionType.LOGIN,
-      payload: { authorization },
-    });
-  }, [authorization]);
+  const expiresTime = useAppSelector(selectExpiresTimeStamp);
 
   const getToken = async (source: CancelTokenSource) => {
     try {
+      setLoading(true);
       const data = new URLSearchParams();
       data.append('grant_type', 'client_credentials');
       const res = await axios({
@@ -40,19 +35,26 @@ export const useGetToken = () => {
         data,
       });
       const { access_token, token_type } = res.data;
-      setAuthorization(token_type + ' ' + access_token);
-      setExpiresTimeStamp(Date.now() + res.data.expires_in);
+      const authorization = token_type + ' ' + access_token;
+      const expiresTimeStamp = Date.now() + res.data.expires_in * 1000;
+
+      dispatch({
+        type: ActionType.LOGIN,
+        payload: { expiresTimeStamp, authorization },
+      });
     } catch (error) {
       throw new Error(`Something went wrong when getting token: ${error}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (expiresTimeStamp < Date.now()) return;
+    if (expiresTime > Date.now()) return;
     const source = axios.CancelToken.source();
     getToken(source);
     return () => source.cancel('get token was canceled');
   }, []);
 
-  return { authorization };
+  return { loading };
 };
