@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Container from '../Container';
+import '@/assets/styles/container-center.css';
 
 interface Props {
   children: ReactNode;
@@ -7,23 +7,11 @@ interface Props {
 
 const ContainerCenter: React.FC<Props> = ({ children }) => {
   return (
-    <Container>
-      <div
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {children}
+    <div className="container-center">
+      <div className="relative-box">
+        <div className="center-box">{children}</div>
       </div>
-    </Container>
+    </div>
   );
 };
 

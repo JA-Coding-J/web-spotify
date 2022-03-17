@@ -4,6 +4,7 @@ import SearchResult from '@/components/SearchResult';
 import SearchForm from '@/components/SearchForm';
 import { SearchType } from '../../types/spotify';
 import { SearchTypeEnum, tabNameMap } from '@/consts';
+import '@/assets/styles/home.css';
 
 export default function Home() {
   const [searchText, setSearchText] = useState<string>('');
@@ -19,13 +20,17 @@ export default function Home() {
   }, [data]);
 
   return (
-    <div className="home" style={{ backgroundColor: '#1b1b1b' }}>
+    <div className="home">
       <SearchForm
         searchText={searchText}
         searchChange={(e) => setSearchText(e.target.value)}
         type={types}
       />
-      <SearchResult data={data} tabsName={types.map((t) => tabNameMap[t])} />
+      <SearchResult
+        data={data}
+        tabsName={types.map((t) => tabNameMap[t])}
+        loading={loading}
+      />
     </div>
   );
 }

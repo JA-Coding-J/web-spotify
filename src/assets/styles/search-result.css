@@ -1,6 +1,13 @@
 .search-result {
   width: 75vw;
-  min-width: 50rem;
+  min-width: 768px;
   margin: auto;
-  min-height: var(--width-lg);
+  flex: 1;
+  position: relative;
+  display: flex;
+}
+
+.search-result_table-container {
+  flex: 1;
+  position: relative;
 }

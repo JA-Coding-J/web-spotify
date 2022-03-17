@@ -1,0 +1,7 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  background-color: #1b1b1b;
+  min-height: 100%;
+  justify-content: flex-start;
+}

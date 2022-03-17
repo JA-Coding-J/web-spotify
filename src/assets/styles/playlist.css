@@ -1,5 +1,6 @@
 .playlist {
   width: 100%;
+  min-height: 36rem;
   position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -15,6 +16,48 @@
 
 .playlist a:hover {
   text-decoration: underline;
+}
+
+/* top bar */
+.playlist .top-bar {
+  top: 0;
+  left: 0;
+  height: 3rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  position: fixed;
+  z-index: 3;
+}
+
+.top-bar .top-bar-back-btn {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--controller-bg-color);
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .2s ease;
+  border-width: 0;
+  border-radius: 50%;
+  padding: .5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-bar .top-bar-back-btn:hover {
+  opacity: 1;
+}
+
+.top-bar-back-btn>i {
+  display: inline-block;
+  border: solid #FFF;
+  border-width: 0 .2rem .2rem 0;
+  padding: .3rem;
+  transform: translateX(25%) rotate(135deg);
 }
 
 /* backgound */
@@ -55,7 +98,7 @@
 /* image */
 .playlist_head .playlist_head-img {
   flex: 1;
-  max-width: 24rem;
+  max-width: 16rem;
   box-sizing: border-box;
   padding: 0 var(--mp-5);
 }
@@ -74,8 +117,8 @@
 }
 
 .playlist_head-right>h1 {
-  font-size: 6rem;
-  line-height: 7rem;
+  font-size: 5rem;
+  line-height: 6rem;
   max-width: 100%;
   overflow-x: hidden;
   white-space: nowrap;
@@ -91,6 +134,8 @@
 .playlist_head-right_owner {
   font-size: 0.9rem;
   line-height: 1rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .playlist_head-right_owner>span::before {
@@ -117,4 +162,12 @@
 .playlist_track-list-container .cs-table-body tr:hover>td {
   background-color: rgba(0, 0, 0, .2);
   cursor: pointer;
+}
+
+/* media */
+@media (max-width: 768px) {
+  .playlist_head-right>h1 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
 }

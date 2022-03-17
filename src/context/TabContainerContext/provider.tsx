@@ -1,4 +1,3 @@
-import Container from '@/components/Container';
 import {
   initialTabContextValue,
   TabContextActionTypeEnum,
@@ -27,24 +26,22 @@ function TabContainerProvider({ children, tabsName }: TabContainerProp) {
 
   return (
     <TabContextProvider value={{ tabIndex: state.tabIndex }}>
-      <Container>
-        <div className="tab-container">
-          <ul>
-            {tabsName &&
-              tabsName.map((tab, index) => (
-                <li
-                  key={tab}
-                  onClick={() => onClickTab(index)}
-                  className={`${state.tabIndex === index ? 'active' : ''}`}
-                >
-                  {tab}
-                </li>
-              ))}
-          </ul>
-          <div className="divider" />
-          {children}
-        </div>
-      </Container>
+      <div className="tab-container">
+        <ul>
+          {tabsName &&
+            tabsName.map((tab, index) => (
+              <li
+                key={tab}
+                onClick={() => onClickTab(index)}
+                className={`${state.tabIndex === index ? 'active' : ''}`}
+              >
+                {tab}
+              </li>
+            ))}
+        </ul>
+        <div className="divider" />
+        {children}
+      </div>
     </TabContextProvider>
   );
 }

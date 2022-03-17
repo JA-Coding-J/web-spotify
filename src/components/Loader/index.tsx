@@ -15,7 +15,7 @@ const Loader: React.FC = () => {
           <div></div>
           <div></div>
         </div>
-        <div className="mt-4">Initializing ...</div>
+        <div className="mt-4">Loading ...</div>
       </div>
     </React.Fragment>
   );
