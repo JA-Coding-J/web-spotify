@@ -1,9 +1,4 @@
-.album-table {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.album-card {
+.card {
   width: 12rem;
   background-color: #3f3c3c;
   border-radius: var(--rounded-md);
@@ -14,41 +9,38 @@
   margin: var(--mp-2) var(--mp-4);
 }
 
-.album-card a {
+.card a {
   text-decoration: none;
 }
 
-.album-card:hover {
+.card:hover {
   cursor: pointer;
   box-shadow: 0 1px 5px var(--color-gray-500);
   background-color: transparent;
 }
 
-.album-card .album-box {
+.card .card-box {
   display: flex;
   flex-direction: column;
 }
 
-.album-box>.album-img {
+.card-box>.card-img {
   margin-bottom: var(--mp-5);
 }
 
-.album-img>img {
+.card-img>img {
   border-radius: var(--rounded-md);
+  width: 11rem;
+  height: 11rem;
+  object-fit: cover;
 }
 
-.album-box>.album-desc {
+.card-box>.card-desc {
   width: 100%;
   text-align: left;
 }
 
-.album-box>.album-desc>a {
-  color: #FFF;
-  font-weight: 700;
-  vertical-align: middle;
-}
-
-.album-desc>a .name {
+.card-box>.card-desc>.name {
   font-size: 1rem;
   line-height: 1.5rem;
   max-width: 100%;
@@ -57,11 +49,17 @@
   text-overflow: ellipsis;
 }
 
-.album-box>.album-desc>.artist a {
+.card-desc>.name a {
+  color: #FFF;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.card-box>.card-desc>.sub-desc a {
   color: var(--color-gray-500);
   text-decoration: none;
 }
 
-.album-box>.album-desc>.artist a:hover {
+.card-box>.card-desc>.sub-desc a:hover {
   text-decoration: underline;
 }

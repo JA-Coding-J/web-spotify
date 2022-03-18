@@ -5,6 +5,7 @@ import TabContainerProvider from '@/context/TabContainerContext/provider';
 import '@/assets/styles/search-result.css';
 import { ResultType } from '@/types/spotify';
 import CenterLoader from '../CenterLoader';
+import ArtistTable from '../ArtistTable';
 
 interface SearchResultProp {
   data: Record<string, ResultType>;
@@ -14,7 +15,7 @@ interface SearchResultProp {
 
 const TableListCompMap = {
   albums: AlbumTable,
-  artists: '',
+  artists: ArtistTable,
   episodes: '',
   playlists: '',
   shows: '',

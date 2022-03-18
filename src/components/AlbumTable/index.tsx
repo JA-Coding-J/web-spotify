@@ -1,32 +1,35 @@
 import { AlbumListItemType } from '@/types/spotify';
+import { imageSortBySize } from '@/utils';
 import React from 'react';
 import { useHistory } from 'react-router';
-import AlbumCard from './AlbumCard';
+import Card from '../Card';
 
 interface AlbumTableProps {
   dataList: Array<AlbumListItemType>;
 }
 
-// const headers = [
-//   'id',
-//   'name',
-//   'image',
-//   'total_tracks',
-//   'artists',
-//   'release_date',
-//   'Link',
-// ];
-
 function AlbumTable({ dataList }: AlbumTableProps) {
   const history = useHistory();
   const onClickCard = (id: string) => history.push(`/album/${id}`);
   return (
-    dataList && (
-      <div className="album-table">
+    dataList &&
+    dataList.length && (
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {dataList.map((album) => (
-          <AlbumCard
+          <Card
             key={album.id}
-            albumData={album}
+            img={{
+              src: imageSortBySize(album.images)[1]?.url ?? '',
+              alt: album.name,
+            }}
+            mainTitle={{
+              name: album.name,
+              extUrl: album.external_urls.spotify,
+            }}
+            subTitle={album.artists.map((a) => ({
+              name: a.name,
+              extUrl: a.external_urls.spotify,
+            }))}
             onClickCard={() => onClickCard(album.id)}
           />
         ))}
