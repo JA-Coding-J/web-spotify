@@ -27,7 +27,7 @@ export const useApi =
     }, [tokenLoading]);
 
     const request = useCallback(
-      async (payload?: D) => {
+      async (payload?: AxiosRequestConfig<D>) => {
         if (!authRef.current) return;
         const source = axios.CancelToken.source();
         try {
@@ -39,7 +39,7 @@ export const useApi =
             },
             cancelToken: source.token,
             method,
-            data: payload,
+            ...payload,
           };
 
           const response = await client(url, config);

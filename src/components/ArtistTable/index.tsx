@@ -10,7 +10,8 @@ interface ArtistTableProps {
 
 function ArtistTable({ dataList }: ArtistTableProps) {
   const history = useHistory();
-  const onClickCard = (id: string) => history.push(`/artist/${id}`);
+  const onClickCard = (artist: ArtistType) =>
+    history.push(`/artist/${artist.id}`, { data: artist });
   return (
     dataList &&
     dataList.length && (
@@ -28,7 +29,7 @@ function ArtistTable({ dataList }: ArtistTableProps) {
               extUrl: artist.external_urls.spotify,
             }}
             subTitle={[{ name: artist.type }]}
-            onClickCard={() => onClickCard(artist.id)}
+            onClickCard={() => onClickCard(artist)}
           />
         ))}
       </div>

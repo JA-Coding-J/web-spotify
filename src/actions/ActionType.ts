@@ -2,6 +2,7 @@
 export enum ActionType {
   LOGIN = 'user/login',
   LOGOUT = 'user/logout',
+  LOCATE = 'user/locate',
 }
 
 export interface Action {

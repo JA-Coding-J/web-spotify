@@ -62,22 +62,20 @@
 
 /* backgound */
 .playlist_page-bg-head {
-  background: linear-gradient(transparent, rgba(0, 0, 0, .5)), no-repeat;
-  background-position: 50%;
-  background-size: cover;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .5));
   background-color: rgb(200, 200, 184);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 36rem;
-  z-index: -2;
+  height: 20rem;
+  z-index: -1;
   transition: background 1s ease;
 }
 
 .playlist_page-bg-tracklist {
   background-image: linear-gradient(rgba(0, 0, 0, .55), var(--bg-color));
-  background-color: rgb(200, 200, 184, .3);
+  background-color: rgb(200, 200, 184);
   position: absolute;
   top: 20rem;
   left: 0;
@@ -99,6 +97,7 @@
 
 /* image */
 .playlist_head .playlist_head-img {
+  flex: 1;
   max-width: 16rem;
   box-sizing: border-box;
   padding: 0 var(--mp-5);
@@ -106,8 +105,7 @@
 
 /* playlist description */
 .playlist_head .playlist_head-right {
-  flex: 1;
-  /* max-width: calc(100vw - 24rem); */
+  max-width: calc(100vw - 24rem);
 }
 
 .playlist_head-right>* {
@@ -116,7 +114,6 @@
 
 .playlist_head-right_type {
   font-size: var(--text-sm);
-  text-transform: capitalize;
 }
 
 .playlist_head-right>h1 {

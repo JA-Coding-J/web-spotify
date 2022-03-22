@@ -2,12 +2,12 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import SearchResult from '.';
 import { searchResult } from '@/__mocks__/mockData';
-import { SearchTypeEnum, tabNameMap } from '@/consts';
-import { SearchType } from '@/types/spotify';
+import { SearchTypeEnum, tabNameMap } from '@/utils/consts';
+import { SpotifyType } from '@/types/spotify';
 
 describe('[SearchResult Component]', () => {
   const data = searchResult;
-  const tabsName = (Object.keys(SearchTypeEnum) as Array<SearchType>).map(
+  const tabsName = (Object.keys(SearchTypeEnum) as Array<SpotifyType>).map(
     (t) => tabNameMap[t],
   );
   test('should show first tab by default', () => {

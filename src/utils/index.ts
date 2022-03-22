@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Image } from '@/types/spotify';
 
 export const imageSortBySize = (images: Array<Image>) =>
@@ -21,9 +22,31 @@ export const trackDuration = (duration: number) => {
 };
 
 export const openPageInNewTab = (url: string) => {
+  if (!url) return;
   const a = document.createElement('a');
   a.setAttribute('href', url);
   a.setAttribute('target', '_blank');
   a.click();
   a.remove();
+};
+
+export const getCountryByIP = () => {
+  try {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async function (position) {
+        const result = await axios.get('http://ws.geonames.org/countryCode', {
+          data: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            type: 'JSON',
+          },
+        });
+        return result.data.countryName;
+      });
+    } else {
+      throw new Error('This browser does not support HTML Geolocation API!');
+    }
+  } catch (error) {
+    console.warn('Get country error: ' + String(error));
+  }
 };

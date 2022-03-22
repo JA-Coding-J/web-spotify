@@ -47,7 +47,12 @@ export const routes: IRoute[] = [
   },
   {
     path: '/album/:id',
-    component: lazy(() => import('@/components/PlayList')),
+    component: lazy(() => import('@/pages/AlbumDetail')),
+    exact: true,
+  },
+  {
+    path: '/artist/:id',
+    component: lazy(() => import('@/pages/ArtistDetail')),
     exact: true,
   },
   // {

@@ -1,6 +1,6 @@
 import axios, { CancelTokenSource } from 'axios';
 import { useEffect, useState } from 'react';
-import { client_id, client_secret } from '../consts';
+import { client_id, client_secret } from '../utils/consts';
 import { Buffer } from 'buffer';
 import { ActionType } from '@/actions/ActionType';
 import { useAppDispatch, useAppSelector } from '@/store';

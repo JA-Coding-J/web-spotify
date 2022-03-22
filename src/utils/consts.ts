@@ -18,3 +18,5 @@ export const tabNameMap = {
   [SearchTypeEnum.show]: 'shows',
   [SearchTypeEnum.track]: 'tracks',
 };
+
+export const countryName = 'US';

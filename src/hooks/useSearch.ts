@@ -1,7 +1,14 @@
-import { AlbumType, SearchType } from '../types/spotify';
+import {
+  AlbumListItemType,
+  AlbumType,
+  ArtistType,
+  ResultType,
+  SpotifyType,
+  TopTracksType,
+} from '../types/spotify';
 import { useEffect } from 'react';
 import { useGet } from './http';
-import { SearchTypeEnum } from '@/consts';
+import { countryName, SearchTypeEnum } from '@/utils/consts';
 
 export type QType =
   | 'album'
@@ -15,22 +22,13 @@ export type QType =
   | 'genre';
 
 export type SearchPayloadType = {
-  q: QType;
-  type: Array<SearchType>;
+  q: string;
+  type: Array<SpotifyType>;
   include_external?: 'audio';
   limit?: number;
   market?: string;
   offset?: number;
 };
-
-// type SearchParam = {
-//   q: QType;
-//   type: string;
-//   include_external?: 'audio';
-//   limit?: number;
-//   market?: string;
-//   offset?: number;
-// };
 
 const defaultPayload = {
   q: 'album',
@@ -53,6 +51,18 @@ export const useSearch = (payload: SearchPayloadType = defaultPayload) => {
     if (!payload.q) return;
     request();
   }, [authorization]);
+  return { request, ...rest };
+};
+
+export const useGetNewReleaseAlbums = (limit = 5, offset = 0) => {
+  const { request, authorization, ...rest } = useGet<{
+    albums: ResultType<AlbumListItemType>;
+  }>(
+    `browse/new-releases?country=${countryName}&limit=${limit}&offset=${offset}`,
+  );
+  useEffect(() => {
+    request();
+  }, [authorization]);
   return { ...rest };
 };
 
@@ -69,6 +79,29 @@ export const useAlbumById = (id: string) => {
   const { request, authorization, ...rest } = useGet<AlbumType>(
     `/albums/${id}`,
   );
+  useEffect(() => {
+    if (!id) return;
+    request();
+  }, [authorization]);
+  return { ...rest };
+};
+
+export const useArtistById = (id: string) => {
+  const { request, authorization, ...rest } = useGet<ArtistType>(
+    `/artists/${id}`,
+  );
+  useEffect(() => {
+    if (!id) return;
+    request();
+  }, [authorization]);
+  return { ...rest };
+};
+
+export const useArtistTopTracks = (id: string) => {
+  // const countryName = useAppSelector(selectCountry);
+  const { request, authorization, ...rest } = useGet<{
+    tracks: Array<TopTracksType>;
+  }>(`/artists/${id}/top-tracks?market=${countryName}`);
   useEffect(() => {
     if (!id) return;
     request();

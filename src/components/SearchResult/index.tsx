@@ -6,11 +6,13 @@ import '@/assets/styles/search-result.css';
 import { ResultType } from '@/types/spotify';
 import CenterLoader from '../CenterLoader';
 import ArtistTable from '../ArtistTable';
+import ContainerCenter from '../ContainerCenter';
 
 interface SearchResultProp {
+  searchText?: string;
   data: Record<string, ResultType>;
   tabsName: Array<string>;
-  loading: boolean;
+  loading?: boolean;
 }
 
 const TableListCompMap = {
@@ -22,7 +24,12 @@ const TableListCompMap = {
   tracks: '',
 };
 
-function SearchResult({ data, tabsName, loading }: SearchResultProp) {
+function SearchResult({
+  searchText = '',
+  data,
+  tabsName,
+  loading,
+}: SearchResultProp) {
   function generateTable(tabIndex: number) {
     // different type result list
     const tableName = tabsName[tabIndex];
@@ -30,7 +37,13 @@ function SearchResult({ data, tabsName, loading }: SearchResultProp) {
     return data && data[tableName] && TableList ? (
       <TableList dataList={data[tableName].items} />
     ) : (
-      <div>no result</div>
+      <ContainerCenter>
+        <h3>No results found for {`"${searchText}"`}</h3>
+        <span>
+          Please make sure your words are spelled correctly or use less or
+          different keywords.
+        </span>
+      </ContainerCenter>
     );
   }
 

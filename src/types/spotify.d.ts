@@ -1,6 +1,6 @@
-import { SearchTypeEnum } from '@/consts';
+import { SearchTypeEnum } from '@/utils/consts';
 
-export type SearchType = keyof typeof SearchTypeEnum;
+export type SpotifyType = keyof typeof SearchTypeEnum;
 
 export interface ResultType<T = Record<string, any>> {
   href: string;
@@ -79,6 +79,8 @@ export type UserType = {
   external_urls: ExternalUrls;
   href: string;
   type: 'user';
+  images?: Array<Image>;
+  followers?: { href: string; total: number };
   uri: string;
 };
 
@@ -112,7 +114,7 @@ export type TrackType = {
   duration_ms: number;
   explicit: boolean;
   album: AlbumListItemType;
-  external_ids: { isrc: string };
+  external_ids: { isrc: string; ean?: string; upc?: string };
   external_urls: ExternalUrls;
   href: string;
   is_local: boolean;
@@ -122,3 +124,16 @@ export type TrackType = {
   type: 'track';
   uri: string;
 };
+
+export interface TopTrackAlbumType extends AlbumListItemType {
+  restrictions: { reason: string };
+  album_group: string;
+  artists: Array<Partial<ArtistType>>;
+}
+
+export interface TopTracksType extends TrackType {
+  album: TopTrackAlbumType;
+  is_playable: boolean;
+  linked_from: Partial<TopTracksType>;
+  restrictions: { reason: string };
+}

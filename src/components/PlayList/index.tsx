@@ -8,106 +8,87 @@ import {
   openPageInNewTab,
   trackDuration,
 } from '@/utils';
-import React from 'react';
-import { useHistory, useParams } from 'react-router';
+import React, { ReactNode } from 'react';
+import { useHistory } from 'react-router';
 import '@/assets/styles/playlist.css';
 import CenterLoader from '../CenterLoader';
+import { SpotifyType } from '@/types/spotify';
 
-function playlist() {
-  const { id } = useParams<{ id: string }>();
+interface PlayListInterface {
+  img: { url: string; isBg?: boolean };
+  type: SpotifyType;
+  title: string;
+  description: ReactNode;
+  loading: boolean;
+  owners: Array<{ url: string; name: string }>;
+  release_date: string;
+  tracksTotal: { total: number; duration?: string };
+  children: ReactNode;
+}
+
+function Playlist({
+  img,
+  type,
+  title,
+  description,
+  loading,
+  owners,
+  release_date,
+  tracksTotal,
+  children,
+}: Partial<PlayListInterface>) {
   const history = useHistory();
-  const { data, loading } = useAlbumById(id);
-
-  function totalDuration() {
-    const ms = data?.tracks.items.reduce((res, t) => res + t.duration_ms, 0);
-    if (!ms) return;
-    const { hour, min, sec } = convertDuration(ms);
-    return (
-      <span className="playlist-duration">
-        {hour && hour + ' h '}
-        {min && min + ' min '}
-        {sec && sec + ' sec'}
-      </span>
-    );
-  }
-
   return (
-    data && (
-      <section className="playlist">
-        <div className="top-bar">
-          <button
-            type="button"
-            className="top-bar-back-btn"
-            onClick={() => history.goBack()}
-          >
-            <i />
-          </button>
-        </div>
-        <div className="playlist_page-bg-head" />
-        <div className="playlist_page-bg-tracklist" />
-        {loading ? (
-          <CenterLoader />
-        ) : (
-          <>
-            <div className="playlist_head">
-              <div className="playlist_head-img">
-                <img
-                  src={imageSortBySize(data.images)[1].url}
-                  style={{ width: '100%' }}
-                />
-              </div>
-              <div className="playlist_head-right">
-                <p className="playlist_head-right_type">
-                  {data.type.toUpperCase()}
-                </p>
-                <h1>{data.name}</h1>
-                <p className="playlist_head-right_desc">{data.label ?? ''}</p>
-                <p className="playlist_head-right_owner">
-                  {data.artists?.length && (
-                    <a href={data.artists[0].external_urls.spotify}>
-                      {data.artists[0].name}
-                    </a>
-                  )}
-                  {data.release_date && (
-                    <span>{data.release_date.slice(0, 4)}</span>
-                  )}
-                  {data.total_tracks > 0 && (
-                    <span>
-                      {data.total_tracks + ' songs'}, {totalDuration()}
-                    </span>
-                  )}
-                </p>
-              </div>
+    <section className="playlist">
+      <div className="top-bar">
+        <button
+          type="button"
+          className="top-bar-back-btn"
+          onClick={() => history.goBack()}
+        >
+          <i />
+        </button>
+      </div>
+      <div
+        className="playlist_page-bg-head"
+        style={
+          img && img.isBg
+            ? {
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)), url(${img.url})`,
+              }
+            : {}
+        }
+      />
+      <div className="playlist_page-bg-tracklist" />
+      {loading ? (
+        <CenterLoader />
+      ) : (
+        <>
+          <div className="playlist_head">
+            <div className="playlist_head-img">
+              {!img.isBg && <img src={img.url} style={{ width: '100%' }} />}
             </div>
-            <div className="playlist_track-list-container">
-              <Table>
-                <Thead>
-                  <Th name="#" />
-                  <Th name="title" />
-                  <Th name="duration" />
-                </Thead>
-                <Tbody>
-                  {data.tracks?.items &&
-                    data.tracks.items.map((track, index) => (
-                      <tr
-                        key={track.id}
-                        onClick={() =>
-                          openPageInNewTab(track.external_urls.spotify)
-                        }
-                      >
-                        <Td>{index}</Td>
-                        <Td>{track.name}</Td>
-                        <Td>{trackDuration(track.duration_ms)}</Td>
-                      </tr>
-                    ))}
-                </Tbody>
-              </Table>
+            <div className="playlist_head-right">
+              <p className="playlist_head-right_type">{type}</p>
+              <h1>{title}</h1>
+              <p className="playlist_head-right_desc">{description}</p>
+              <p className="playlist_head-right_owner">
+                {owners?.length && <a href={owners[0].url}>{owners[0].name}</a>}
+                {release_date && <span>{release_date}</span>}
+                {tracksTotal && (
+                  <span>
+                    {tracksTotal.total + ' songs'}
+                    {tracksTotal.duration && `,${tracksTotal.duration}`}
+                  </span>
+                )}
+              </p>
             </div>
-          </>
-        )}
-      </section>
-    )
+          </div>
+          <div className="playlist_track-list-container">{children}</div>
+        </>
+      )}
+    </section>
   );
 }
 
-export default playlist;
+export default Playlist;

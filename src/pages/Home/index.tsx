@@ -1,36 +1,76 @@
 import React, { useEffect, useState } from 'react';
-import { useSearch } from '../../hooks/useSearch';
+import {
+  SearchPayloadType,
+  useGetNewReleaseAlbums,
+  useSearch,
+} from '../../hooks/useSearch';
 import SearchResult from '@/components/SearchResult';
 import SearchForm from '@/components/SearchForm';
-import { SearchType } from '../../types/spotify';
-import { SearchTypeEnum, tabNameMap } from '@/consts';
+import { SpotifyType } from '../../types/spotify';
+import { SearchTypeEnum, tabNameMap } from '@/utils/consts';
 import '@/assets/styles/home.css';
+import { useGet } from '@/hooks/http';
+import AlbumTable from '@/components/AlbumTable';
+import Container from '@/components/Container';
+import CenterLoader from '@/components/CenterLoader';
 
 export default function Home() {
-  const [searchText, setSearchText] = useState<string>('');
-  const [types, setTypes] = useState<Array<SearchType>>(
-    Object.keys(SearchTypeEnum) as Array<SearchType>,
-  );
-  // const [formData, setFormData] = useState<SearchPayloadType>();
-  const { data, loading, error } = useSearch();
+  const [searchText, setSearchText] = useState<string>();
+  const [types, setTypes] = useState<Array<SpotifyType>>([
+    SearchTypeEnum.album,
+    SearchTypeEnum.artist,
+  ]);
+  const { data: newRelsAlbums, loading: nrLoading } =
+    useGetNewReleaseAlbums(20);
+  const { request, data, loading, authorization } = useGet<
+    any,
+    SearchPayloadType
+  >(`/search`);
 
   useEffect(() => {
-    console.log(data);
-    console.log(extractObjectType(data));
-  }, [data]);
+    onSearch();
+  }, [searchText, types, authorization]);
+
+  const onSearch = async () => {
+    if (!searchText || types?.length === 0) return;
+    await request({
+      params: {
+        q: searchText,
+        type: types.join(','),
+      },
+    });
+  };
 
   return (
     <div className="home">
       <SearchForm
         searchText={searchText}
         searchChange={(e) => setSearchText(e.target.value)}
-        type={types}
+        submit={(e) => onSearch()}
+        selectedTypes={types}
+        onChangeType={(values) => setTypes(values as Array<SpotifyType>)}
+        typeList={[SearchTypeEnum.album, SearchTypeEnum.artist]}
       />
-      <SearchResult
-        data={data}
-        tabsName={types.map((t) => tabNameMap[t])}
-        loading={loading}
-      />
+      {searchText ? (
+        <SearchResult
+          searchText={searchText}
+          data={data}
+          tabsName={types.map((t) => tabNameMap[t])}
+          loading={loading}
+        />
+      ) : (
+        <Container>
+          {nrLoading ? (
+            <CenterLoader />
+          ) : (
+            <div>
+              <h2>New Release Albums</h2>
+              <br />
+              <AlbumTable dataList={newRelsAlbums?.albums.items || []} />
+            </div>
+          )}
+        </Container>
+      )}
     </div>
   );
 }
